@@ -14,19 +14,18 @@ const server = http.createServer((req, res) => {
     if(url === '/message' && method === 'POST'){
         const body = []
         req.on('data', (chunk) => {
-            console.log(chunk, 'chunk')
             body.push(chunk)
         })
-        req.on('end',  () => {
+       return req.on('end',  () => {
             const parsedBody = Buffer.concat(body).toString()
             const message = parsedBody.split('=')[1]
-            console.log(parsedBody, 'parsedBody')
-            fs.writeFileSync('message.txt', message)
+            fs.writeFile('message.txt', message, (error) => {
+               res.writeHead(302, {
+                   'Location': '/'
+               })
+               return res.end()
+           })
         })
-        res.writeHead(302, {
-            'Location': '/'
-        })
-        return res.end()
     }
     res.setHeader('Content-type', 'text/html')
     res.write('<h1>Hello form node.js</h1>')
