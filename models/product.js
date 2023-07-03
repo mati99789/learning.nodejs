@@ -11,10 +11,13 @@ const getProductFromFile = (cb) => {
         return cb(JSON.parse(fileContent))
     })
 }
-
 module.exports = class Product {
-    constructor(title) {
-        this.title = title
+    constructor(title, imageUrl, description, price) {
+        this.imageUrl = imageUrl;
+        this.description = description;
+        this.price = price;
+        this.title = title;
+
     }
 
     save() {
