@@ -2,14 +2,14 @@ const adminData = require("../routes/admin");
 const Product = require('../models/product')
 
 exports.getProducts = (req, res, next) => {
-    Product.fetchAll((products) => {
-        res.render('shop/product-list', {products, pageTitle: 'All Products', path: '/products'})
+    Product.fetchAll((prods) => {
+        res.render('shop/product-list', {prods, pageTitle: 'All Products', path: '/products'})
     })
 }
 
 exports.getIndex = (req, res, next) => {
-    Product.fetchAll((products) => {
-        res.render('shop/index', {products, pageTitle: 'Shop', path: '/'})
+    Product.fetchAll((prods) => {
+        res.render('shop/index', {prods, pageTitle: 'Shop', path: '/'})
     })
 }
 
@@ -23,5 +23,12 @@ exports.getCheckout = (req, res, next) => {
     res.render('shop/checkout', {
         path: '/checkout',
         pageTitle: 'Checkout'
+    })
+}
+
+exports.getOrders = (req, res, next) => {
+    res.render('shop/orders', {
+        path: '/orders',
+        pageTitle: 'Orders'
     })
 }
