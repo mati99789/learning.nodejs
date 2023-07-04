@@ -21,6 +21,8 @@ module.exports = class Product {
     }
 
     save() {
+        // for testing
+        this.id = Math.random();
         getProductFromFile((products) =>{
             products.push(this)
 
@@ -32,5 +34,12 @@ module.exports = class Product {
 
     static fetchAll(cb) {
         getProductFromFile(cb)
+    }
+
+    static findById(id, cb) {
+        getProductFromFile(products => {
+            const product = products.find(p => p.id === id)
+            cb(product)
+        })
     }
 }

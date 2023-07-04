@@ -7,6 +7,13 @@ exports.getProducts = (req, res, next) => {
     })
 }
 
+exports.getProduct = (req, res, next) => {
+    const prodId = req.params.productId
+    Product.findById(prodId, (product) => {
+        console.log(product)
+    })
+}
+
 exports.getIndex = (req, res, next) => {
     Product.fetchAll((prods) => {
         res.render('shop/index', {prods, pageTitle: 'Shop', path: '/'})
